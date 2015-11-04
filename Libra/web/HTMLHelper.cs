@@ -1,4 +1,4 @@
-﻿using libra.util;
+﻿using Libra.helper;
 using System;
 using System.IO;
 using System.Net;
@@ -8,7 +8,7 @@ using System.Windows;
 
 namespace libra.web
 {
-    class HTMLHelper
+    public class HTMLHelper
     {
 
         private class RequestState

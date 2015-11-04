@@ -3,7 +3,7 @@ using MongoDB.Driver;
 
 namespace libra.db.mongoDB
 {
-    class MongoDBHelper
+    public class MongoDBHelper
     {
         public static string connectionString;
 

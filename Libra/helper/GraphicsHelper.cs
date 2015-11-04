@@ -15,9 +15,12 @@ namespace Libra.helper
     public class GraphicsHelper
     {
 
-        public static void Draw(Canvas canvas, List<LinePoint> points, Brush stroke)
+        public static void Draw(Canvas canvas, List<LinePoint> points, Brush stroke, bool clear = true)
         {
-            canvas.Children.Clear();
+            if (clear)
+            {
+                canvas.Children.Clear();
+            }
 
             PathFigureCollection myPathFigureCollection = new PathFigureCollection();
             PathGeometry myPathGeometry = new PathGeometry();
