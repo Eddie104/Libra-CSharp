@@ -1,5 +1,8 @@
 ﻿using System;
+using System.Collections.Generic;
 using System.Drawing;
+using System.Drawing.Drawing2D;
+using System.Drawing.Imaging;
 using System.Net;
 
 namespace Libra.helper
@@ -78,6 +81,70 @@ namespace Libra.helper
             //dsImage.Save("yuancd.jpg", System.Drawing.Imaging.ImageFormat.Jpeg);
             return image;
         }
+
+        //public static List<Rectangle> GetRectangle(Bitmap bitmap)
+        //{
+        //    List<Rectangle> rectList = new List<Rectangle>();
+
+        //    int w = bitmap.Width;
+        //    int h = bitmap.Height;
+        //    Color color;
+        //    for (int row = 0; row < h; row++)
+        //    {
+        //        for (int col = 0; col < w; col++)
+        //        {
+        //            color = bitmap.GetPixel(col, row);
+        //            if (color.A > 0)
+        //            {
+
+        //            }
+        //        }
+        //    }
+
+        //    return rectList;
+        //}
+
+        /// <summary>
+        /// 根据图片得到一个图片非透明部分的区域
+        /// </summary>
+        /// <param name="bckImage"></param>
+        /// <returns></returns>
+        public static unsafe Region GetRegion(Bitmap bckImage)
+        {
+            GraphicsPath path = new GraphicsPath();
+            int w = bckImage.Width;
+            int h = bckImage.Height;
+            BitmapData bckdata = null;
+            try
+            {
+                bckdata = bckImage.LockBits(new Rectangle(0, 0, w, h), ImageLockMode.ReadOnly, PixelFormat.Format32bppArgb);
+                uint* bckInt = (uint*)bckdata.Scan0;
+                for (int j = 0; j < h; j++)
+                {
+                    for (int i = 0; i < w; i++)
+                    {
+                        if ((*bckInt & 0xff000000) != 0)
+                        {
+                            path.AddRectangle(new Rectangle(i, j, 1, 1));
+                        }
+                        bckInt++;
+                    }
+                }
+                bckImage.UnlockBits(bckdata); bckdata = null;
+            }
+            catch
+            {
+                if (bckdata != null)
+                {
+                    bckImage.UnlockBits(bckdata);
+                    bckdata = null;
+                }
+            }
+            Region region = new Region(path);
+            path.Dispose(); path = null;
+            return region;
+        }
+
 
     }
 }
