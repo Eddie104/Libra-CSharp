@@ -3,13 +3,13 @@ using System.Windows;
 
 namespace Libra.helper
 {
-    public class RectangularHelper
+    public class RectangularHelper : ICoordinateHelper
     {
-        public static int Width { get; set; }
+        public double Width { get; set; }
 
-        public static int Height { get; set; }
+        public double Height { get; set; }
 
-        public static Point TopPoint { get; set; }
+        public Point TopPoint { get; set; }
 
         /// <summary>
         /// 获得屏幕上点的方块索引
@@ -28,7 +28,7 @@ namespace Libra.helper
         /// </summary>
         /// <param name="mouseP"></param>
         /// <returns></returns>
-        public static Point GetItemIndex(Point mouseP)
+        public Point GetItemIndex(Point mouseP)
         {
             //mouseP = Point.Subtract(mouseP, new Vector(TopPoint.X, TopPoint.Y));
             //double row = mouseP.Y / Height - mouseP.X / Width;
@@ -47,7 +47,7 @@ namespace Libra.helper
         /// <param name="row"></param>
         /// <param name="col"></param>
         /// <returns></returns>
-        public static Point GetItemPos(int row, int col)
+        public Point GetItemPos(int row, int col)
         {
             //return new Point((col - row) * (Width * .5) + TopPoint.X, (col + row) * (Height * .5) + TopPoint.Y);
             return new Point(col * Width + TopPoint.X, row * Height + TopPoint.Y);

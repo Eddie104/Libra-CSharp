@@ -56,9 +56,11 @@
     <Compile Include="db\mongoDB\MongoDB.cs" />
     <Compile Include="db\mongoDB\ObjectIdGenerator.cs" />
     <Compile Include="helper\ByteConvertHelper.cs" />
+    <Compile Include="helper\EventHelper.cs" />
     <Compile Include="helper\FileHelper.cs" />
     <Compile Include="helper\GraphicsHelper.cs" />
     <Compile Include="helper\Hotkey.cs" />
+    <Compile Include="helper\ICoordinateHelper.cs" />
     <Compile Include="helper\ImageHelper.cs" />
     <Compile Include="helper\ISOHelper.cs" />
     <Compile Include="helper\PlistHelper.cs" />

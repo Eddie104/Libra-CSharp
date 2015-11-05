@@ -3,16 +3,22 @@ using System.Windows;
 
 namespace Libra.helper
 {
-    public class ISOHelper
+    public class ISOHelper : ICoordinateHelper
     {
 
-        public static int Width { get; set; }
+        public double Width { get; set; }
 
-        public static int Height { get; set; }
+        public double Height { get; set; }
 
-        public static Point TopPoint { get; set; }
+        public Point TopPoint { get; set; }
 
-        private static int wh = 2;
+        public ISOHelper(double width, double height)
+        {
+            Width = width;
+            Height = height;
+        }
+
+        //private int wh = 2;
 
         /// <summary>
         /// 获得屏幕上点的方块索引
@@ -30,7 +36,7 @@ namespace Libra.helper
         /// </summary>
         /// <param name="mouseP"></param>
         /// <returns></returns>
-        public static Point GetItemIndex(Point mouseP)
+        public Point GetItemIndex(Point mouseP)
         {
             mouseP = Point.Subtract(mouseP, new Vector(TopPoint.X, TopPoint.Y));
             double row = mouseP.Y / Height - mouseP.X / Width;
@@ -44,29 +50,29 @@ namespace Libra.helper
         /// <param name="row"></param>
         /// <param name="col"></param>
         /// <returns></returns>
-        public static Point GetItemPos(int row, int col)
+        public Point GetItemPos(int row, int col)
         {
             return new Point((col - row) * (Width * .5) + TopPoint.X, (col + row) * (Height * .5) + TopPoint.Y);
         }
 
-        /// <summary>
-        /// 从45度显示坐标换算为90度数据坐标
-        /// </summary>
-        /// <param name="p"></param>
-        /// <returns></returns>
-        public static Point Trans45To90(Point p)
-        {
-            return new Point(p.X + p.Y * wh, p.Y - p.X / wh);
-        }
+        ///// <summary>
+        ///// 从45度显示坐标换算为90度数据坐标
+        ///// </summary>
+        ///// <param name="p"></param>
+        ///// <returns></returns>
+        //public Point Trans45To90(Point p)
+        //{
+        //    return new Point(p.X + p.Y * wh, p.Y - p.X / wh);
+        //}
 
-        /// <summary>
-        /// 从90度数据坐标换算为45度显示坐标
-        /// </summary>
-        /// <param name="p"></param>
-        /// <returns></returns>
-        public static Point Trans90To45(Point p)
-        {
-            return new Point((p.X - p.Y * wh) * .5, (p.X / wh + p.Y) * .5);
-        }
+        ///// <summary>
+        ///// 从90度数据坐标换算为45度显示坐标
+        ///// </summary>
+        ///// <param name="p"></param>
+        ///// <returns></returns>
+        //public Point Trans90To45(Point p)
+        //{
+        //    return new Point((p.X - p.Y * wh) * .5, (p.X / wh + p.Y) * .5);
+        //}
     }
 }
